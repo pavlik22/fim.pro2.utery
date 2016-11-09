@@ -6,9 +6,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import picture.Picture;
+import picture.PictureFileSource;
 
 public class PlayGround extends JPanel{
 	public static final int HEIGHT = 800;
@@ -23,11 +27,19 @@ public class PlayGround extends JPanel{
 	private BufferedImage imgBackground;
 	private Timer AnimationTimer;
 	private boolean pause = false;
-	private boolean gameRuns = true; //hra bìží
+	private boolean gameRuns = false; //hra bìží
 	private int moveBackgroundX = 0; //posun pozadí
 	
 	public PlayGround() {
+		PictureFileSource z = new PictureFileSource();
+		z.fillMap();
+		z.setSource(Picture.BACKGROUND.getKey());
+		try {
+			imgBackground = z.getPicture();
+		} catch (IOException e){
+			e.printStackTrace();
 		
+		}
 	
 	}
 	
