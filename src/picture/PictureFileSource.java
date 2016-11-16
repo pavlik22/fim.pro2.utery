@@ -13,6 +13,7 @@ public class PictureFileSource extends PictureSource{
 	@Override
 	public void fillMap() {
 		getMap().put(Picture.BACKGROUND.getKey(), "background.png");
+		getMap().put(Picture.PLAYER.getKey(), "trump.jpg");
 		//TODO
 	}
 

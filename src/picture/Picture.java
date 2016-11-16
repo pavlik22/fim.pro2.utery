@@ -6,10 +6,12 @@ import java.util.prefs.BackingStoreException;
 
 import game.PlayGround;
 import game.Player;
+import game.Wall;
 
 public enum Picture {
 	PLAYER("player", Player.WIDTH, Player.HEIGHT, new Color(255, 255, 255)),
-	BACKGROUND("background", PlayGround.WIDTH*3, PlayGround.HEIGHT, new Color(0, 0, 150));
+	BACKGROUND("background", PlayGround.WIDTH*3, PlayGround.HEIGHT, new Color(0, 0, 150)),
+	WALL("wall", Wall.WIDTH, PlayGround.HEIGHT, new Color(120, 0, 0));
 	
 	//poèet prvkù
 	private static final int size = Picture.values().length;

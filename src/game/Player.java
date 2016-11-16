@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -58,6 +59,12 @@ public class Player {
 	 */
 	public void paint(Graphics g) {
 		g.drawImage(img, x, y, null);
+		
+		if (PlayGround.DEBUG) {
+			g.setColor(Color.WHITE);
+			g.drawString("[x="+x+", y="+y+", speed="+speed+"]", x, y-5);
+			
+		}
 	}
 	
 	public int getPlayersHeight() {

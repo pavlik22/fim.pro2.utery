@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import picture.Picture;
 import picture.PictureFileSource;
 
 public class PlayGround extends JPanel{
+	public static final boolean DEBUG = true;  //pomocná konstanta pro testování,debugování
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 600;
 	
@@ -23,7 +25,7 @@ public class PlayGround extends JPanel{
 	
 	//TODO
 	
-	
+	private Player player;
 	private BufferedImage imgBackground;
 	private Timer AnimationTimer;
 	private boolean pause = false;
@@ -40,6 +42,22 @@ public class PlayGround extends JPanel{
 			e.printStackTrace();
 		
 		}
+		
+		z.setSource(Picture.PLAYER.getKey());
+		BufferedImage imgPlayer;
+		//player = new Player(null);
+		try {
+			imgPlayer = z.getPicture();
+			player = new Player(imgPlayer);
+		} catch (IOException e){
+			e.printStackTrace();
+		
+		}
+		
+		
+		
+		
+		
 	
 	}
 	
@@ -52,6 +70,14 @@ public class PlayGround extends JPanel{
 		//druhe je posunuto o sirku obrazku
 		g.drawImage(imgBackground, moveBackgroundX+imgBackground.getWidth(), 0, null);
 		
+		if (PlayGround.DEBUG) {
+			g.setColor(Color.WHITE);
+			g.drawString("moveBackgroundX="+moveBackgroundX, 0, 10);
+			
+		}
+		
+		
+		player.paint(g);
 		
 	}
 	
@@ -59,7 +85,7 @@ public class PlayGround extends JPanel{
 		if ( ! pause && gameRuns ) {
 			
 			//TODO
-			
+			player.move();
 			
 			//posun pozice pozadi hraci plochy (skrolovani)
 			moveBackgroundX = moveBackgroundX + PlayGround.SPEED;
@@ -72,7 +98,7 @@ public class PlayGround extends JPanel{
 	}
 	
 	//STARTOVACI METODA
-	private void StartGame() {
+	private void startGame() {
 		AnimationTimer = new Timer(20, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -93,9 +119,10 @@ public class PlayGround extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				
 				if (e.getButton() == MouseEvent.BUTTON1) {
+					player.jump();
 					//TODO skok hráèe - leve tlaèítko
 				} 
-				
+				//pauza
 				if (e.getButton() == MouseEvent.BUTTON3) {
 
 					if (gameRuns) {
@@ -107,7 +134,7 @@ public class PlayGround extends JPanel{
 						
 					} else {
 						setNewGame();
-						StartGame();
+						startGame();
 						
 						
 					}

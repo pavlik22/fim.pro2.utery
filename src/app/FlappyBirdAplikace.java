@@ -30,8 +30,7 @@ public class FlappyBirdAplikace extends JFrame{
 		this.revalidate();
 		this.repaint();
 		
-		
-		pg.setPlayGround();
+	
 		
 	}
 
@@ -42,7 +41,7 @@ public class FlappyBirdAplikace extends JFrame{
 			public void run() {
 				FlappyBirdAplikace app = new FlappyBirdAplikace();
 				app.initGUI();
-				
+				app.start();
 			}
 			
 		});
